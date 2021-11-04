@@ -6,7 +6,8 @@ describe('Pokedex', function() {
   })
 
   it('single pokemon works', function() {
-    cy.visit('http://localhost:5000/pokemon/ivysaur')
+    cy.visit('http://localhost:5000')
+    cy.contains('ivysaur').click()
     cy.contains('chlorophyll')
   })
 })
