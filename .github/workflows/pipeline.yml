@@ -32,3 +32,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fso-pokedex-exercise"
           heroku_email: "software.kukkonen@gmail.com"
+          healthcheck: "https://fso-pokedex-exercise.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
