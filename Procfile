@@ -1,1 +1,1 @@
-web: npm run start-prod-bug
+web: npm run start-prod
