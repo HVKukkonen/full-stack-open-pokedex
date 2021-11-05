@@ -10,6 +10,7 @@ on:
 
 jobs:
   pre_deployment_tests:
+    if: ${{ github.event_name != 'push' }}
     runs-on: ubuntu-18.04
     env:
       PORT: 5000
@@ -34,7 +35,7 @@ jobs:
           wait-on: http://localhost:5000
 
   deployment_pipeline:
-    if: ${{ github.event_name == 'push' }}
+    if: github.event_name == 'push' && !contains(github.event.commits.*.message[0], '#skip')
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -47,3 +48,13 @@ jobs:
           healthcheck: "https://fso-pokedex-exercise.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+
+  tag_release:
+    if: github.event_name == 'push' && !contains(github.event.commits.*.message[0], '#skip')
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
