@@ -4,7 +4,7 @@ on: push
 
 jobs:
   default-msg:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
