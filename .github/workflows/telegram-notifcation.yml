@@ -1,10 +1,8 @@
 name: telegram message
 
 on: push
-jobs:
-
+default-msg:
   build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: send telegram message on push
