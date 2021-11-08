@@ -1,0 +1,10 @@
+name: Health check
+
+on:
+  push
+
+steps:
+  - name: Check the deployed service URL
+    uses: jtalk/url-health-check-action@v2
+    with:
+      url: http://fso-pokedex-exercise.herokuapp.com/
